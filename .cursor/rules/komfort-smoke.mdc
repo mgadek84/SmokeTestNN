@@ -1,0 +1,17 @@
+---
+description: How to keep the single komfort.pl smoke test small and runnable
+alwaysApply: true
+---
+
+# Komfort smoke test
+
+This checkout adds one smoke test on top of the Playwright TypeScript framework. Leave the SauceDemo and Facebook specs alone unless the task asks for them.
+
+- Spec: `tests/specs/komfort-smoke.spec.ts`
+- Page actions: `tests/pages/preferred-pom/komfort-page.ts`
+- Write actions as functions, using the framework helpers in `src/vasu-playwright` (`click`, `hover`, `gotoURL`, `expectElementToContainText`).
+- Run only this test: `npm run test:komfort`
+- Open Płytki from the homepage Kategorie card (`/st/plytki?klink=homepage`), not the top menu.
+- Kolor **Białe** is the `kolor_plytki` checkbox. Do not select **Biała**.
+- Quantity starts at 1. Four clicks on "+" means the cart quantity is 5.
+- Accept the cookie banner before clicking the page.
