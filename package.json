@@ -58,6 +58,7 @@
     "test:reg": "node ./node_modules/@playwright/test/cli.js test --project=chromium -g '@reg'",
     "test:smoke": "node ./node_modules/@playwright/test/cli.js test --project=chromium -g '@smoke'",
     "test:komfort": "node ./node_modules/@playwright/test/cli.js test tests/specs/komfort-smoke.spec.ts --project=chromium",
+    "test:komfort:headed": "node ./scripts/komfort-headed.js",
     "report": "node ./node_modules/@playwright/test/cli.js show-report playwright-report",
     "ui": "node ./node_modules/@playwright/test/cli.js test --ui-port 0",
     "trace": "node ./node_modules/@playwright/test/cli.js show-trace --port 0",

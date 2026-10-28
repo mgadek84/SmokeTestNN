@@ -11,12 +11,26 @@ import dotenv from 'dotenv';
 dotenv.config({ path: '.env' });
 
 const BASE_URL = process.env.URL || 'https://www.saucedemo.com/';
+const headedFullscreen = process.env.HEADED_FULLSCREEN === '1';
 const startLocalHost = process.env.URL && process.env.URL.includes('localhost');
 /**
  * Default load state to be used while loading a URL or performing a click and navigate operation.
  * The load state is set to 'domcontentloaded', which means the action will wait until the 'DOMContentLoaded' event is fired.
  */
 export const LOADSTATE: WaitForLoadStateOptions = 'domcontentloaded';
+
+/**
+ * Headed fullscreen drops the fixed viewport so Chromium can use the whole screen.
+ * deviceScaleFactor cannot be combined with a null viewport.
+ */
+function chromiumUse() {
+  const device = { ...devices['Desktop Chrome'] };
+  if (headedFullscreen) {
+    delete device.deviceScaleFactor;
+    return { ...device, viewport: null };
+  }
+  return { ...device, viewport: { width: 1600, height: 1000 } };
+}
 
 export default defineConfig({
   /**
@@ -93,10 +107,9 @@ export default defineConfig({
     {
       name: 'chromium',
       use: {
-        ...devices['Desktop Chrome'],
-        viewport: { width: 1600, height: 1000 },
+        ...chromiumUse(),
         launchOptions: {
-          args: ['--disable-web-security'],
+          args: headedFullscreen ? ['--disable-web-security', '--start-fullscreen'] : ['--disable-web-security'],
           /* --auto-open-devtools-for-tabs option is used to open a test with Network tab for debugging. It can help in analyzing network requests and responses.*/
           // args: ["--disable-web-security","--auto-open-devtools-for-tabs"],
           slowMo: 0,
