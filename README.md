@@ -31,9 +31,10 @@ This framework is ideal for QA professionals, developers, and business analysts 
 
 ```bash
 npm install
-npx playwright install chromium
 npm run test:komfort
 ```
+
+`npm install` installs the Chromium browser this test uses. The test script calls `node ./node_modules/@playwright/test/cli.js` directly, so a different `playwright` command on PATH cannot take over.
 
 ## Key Features:
 

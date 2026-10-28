@@ -52,21 +52,21 @@
     "winston": "^3.10.0"
   },
   "scripts": {
-    "test": "playwright test",
-    "test:chromium": "playwright test --retries 0 --project=chromium",
-    "test:chromium-headed": "playwright test -j 1 --retries 0 --headed --project=chromium",
-    "test:reg": "playwright test --project=chromium -g '@reg'",
-    "test:smoke": "playwright test --project=chromium -g '@smoke'",
-    "test:komfort": "playwright test tests/specs/komfort-smoke.spec.ts --project=chromium",
-    "report": "playwright show-report playwright-report",
-    "ui": "playwright test --ui-port 0",
-    "trace": "playwright show-trace --port 0",
+    "test": "node ./node_modules/@playwright/test/cli.js test",
+    "test:chromium": "node ./node_modules/@playwright/test/cli.js test --retries 0 --project=chromium",
+    "test:chromium-headed": "node ./node_modules/@playwright/test/cli.js test -j 1 --retries 0 --headed --project=chromium",
+    "test:reg": "node ./node_modules/@playwright/test/cli.js test --project=chromium -g '@reg'",
+    "test:smoke": "node ./node_modules/@playwright/test/cli.js test --project=chromium -g '@smoke'",
+    "test:komfort": "node ./node_modules/@playwright/test/cli.js test tests/specs/komfort-smoke.spec.ts --project=chromium",
+    "report": "node ./node_modules/@playwright/test/cli.js show-report playwright-report",
+    "ui": "node ./node_modules/@playwright/test/cli.js test --ui-port 0",
+    "trace": "node ./node_modules/@playwright/test/cli.js show-trace --port 0",
     "allure": "allure generate ./allure-results --clean && allure open ./allure-report",
     "lint": "eslint 'tests/**/*.ts' 'src/**/*.ts' 'playwright.config.ts'",
     "lint:fix": "eslint 'tests/**/*.ts' 'src/**/*.ts' 'playwright.config.ts' --fix",
     "prepare": "husky install",
     "format": "prettier --write 'tests/**/*.ts' 'src/**/*.ts' 'playwright.config.ts' '**/*.json' '**/*.md' '!package-lock.json' '!dist/**/*' '!build/**/*'",
-    "postinstall": "playwright install"
+    "postinstall": "node ./node_modules/@playwright/test/cli.js install chromium"
   },
   "husky": {
     "hooks": {
